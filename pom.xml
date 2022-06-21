@@ -13,14 +13,27 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Single-Sign-on</name>
     <description>Single-Sign-on</description>
-
+    <packaging>pom</packaging>
     <modules>
-
+        <module>auth-service</module>
+        <module>hello-service</module>
+        <module>gateway-service</module>
+        <module>common</module>
     </modules>
-
+    <repositories>
+    <repository>
+        <id>aliyun</id>
+        <name>aliyun Repository</name>
+        <url>https://maven.aliyun.com/repository/public</url>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+    </repositories>
     <properties>
         <java.version>11</java.version>
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
+        <fastjson2.version>2.0.5</fastjson2.version>
     </properties>
 
 
@@ -38,11 +51,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba</artifactId>
-            <version>${spring-cloud-alibaba.version}</version>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${fastjson2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>

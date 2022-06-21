@@ -1,7 +1,6 @@
 HELP.md
 target/
-**/.mvn/
-mvnw*
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -32,6 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-**/application.yml
-**/bootstrap.yml
-
