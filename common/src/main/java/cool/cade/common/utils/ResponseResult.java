@@ -1,7 +1,8 @@
 package cool.cade.common.utils;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cool.cade.common.constant.StatusCodeEnum;
 
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 public class ResponseResult<T> {
     private static final long serialVersionUID = 1L;
 
+    private static final JacksonUtil jacksonUtil = new JacksonUtil();
     /**
      * code:状态码
      * msg:消息
@@ -69,18 +71,43 @@ public class ResponseResult<T> {
         return this;
     }
 
-    public static<T> ResponseResult ok(){
+    public static<T> ResponseResult<T> ok(T data){
+        return new ResponseResult<T>(StatusCodeEnum.SUCCESS.getCode(),
+                StatusCodeEnum.SUCCESS.getMsg(), data);
+    }
+
+    public static<T> ResponseResult<T> ok(){
         return new ResponseResult<T>(StatusCodeEnum.SUCCESS);
     }
 
-    public static<T> ResponseResult error(int code, String msg) {
-        return new ResponseResult<T>(code, msg);
+    public static <T> ResponseResult<T> error(int code, String msg, T data) {
+        return new ResponseResult<>(code, msg, data);
     }
-    public static<T> ResponseResult error(StatusCodeEnum codeEnum) {
-        return ResponseResult.error(codeEnum.getCode(), codeEnum.getMsg());
+
+    public static <T> ResponseResult<T>  error(StatusCodeEnum codeEnum, T data) {
+        return ResponseResult.error(codeEnum.getCode(), codeEnum.getMsg(), data);
     }
-    public static<T> ResponseResult error() {
-        return ResponseResult.error(StatusCodeEnum.INTERNAL_ERROR);
+
+    public static <T> ResponseResult<T>  error(StatusCodeEnum codeEnum) {
+        return ResponseResult.error(codeEnum.getCode(), codeEnum.getMsg(), null);
+    }
+
+    public static <T> ResponseResult<T> error() {
+        return ResponseResult.error(StatusCodeEnum.INTERNAL_ERROR,null);
+    }
+
+    /**
+     * 转换成Json字符串，异常抛出去，让全局异常捕获，或者外部按需处理
+     * @return
+     * @throws JsonProcessingException
+     */
+    public String toJsonString() throws JsonProcessingException {
+        return jacksonUtil.toJsonString(this);
+    }
+
+    // 结果等同于toJsonString().getBytes(StandardCharsets.UTF_8)
+    public byte[] toJSONBytes() throws JsonProcessingException {
+        return jacksonUtil.toJSONBytes(this);
     }
 
 }

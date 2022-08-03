@@ -1,0 +1,51 @@
+{
+  "properties": [
+    {
+      "name": "jwt.TTL",
+      "type": "java.lang.Integer",
+      "description": "JWT的过期时间，单位秒，默认3600"
+    },
+    {
+      "name": "jwt.refreshTTL",
+      "type": "java.lang.Integer",
+      "description": "JWT的过期时间，单位秒，默认3600"
+    },
+    {
+      "name": "jwt.base64-secret-key",
+      "type": "java.lang.String",
+      "description": "JWT 盐,Base64明文"
+    },
+    {
+      "name": "jwt.algorithm",
+      "type": "java.lang.String",
+      "description": "secret-key加密算法，默认AES"
+    },
+    {
+      "name": "jwt.signatureAlgorithm",
+      "type": "java.lang.String",
+      "description": "jwt签名算法，默认HS256"
+    },
+    {
+      "name": "jwt.issuer",
+      "type": "java.lang.String",
+      "description": "签发者"
+    },
+    {
+      "name": "jwt.REFRESH_TOKEN_CACHE_KEY_PREFIX",
+      "type": "java.lang.String",
+      "description": "RefreshToken缓存key前缀，默认TEST:JWT_REFRESH_TOKEN:"
+    },
+
+    {
+      "name": "jwt.tokenHreader",
+      "type": "java.lang.String",
+      "description": "请求中token的Header，默认X-Token"
+    },
+
+    {
+      "name": "jwt.refreshTokenHeader",
+      "type": "java.lang.String",
+      "description": "请求中refreshToken的Header，默认X-Token-Refresh"
+    }
+  ]
+}
