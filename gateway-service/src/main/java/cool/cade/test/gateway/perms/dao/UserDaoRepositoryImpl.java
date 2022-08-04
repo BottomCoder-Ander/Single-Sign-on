@@ -1,10 +1,8 @@
-package cool.cade.test.gateway.dao;
+package cool.cade.test.gateway.perms.dao;
 
-import cool.cade.test.gateway.entity.UserEntity;
-import io.jsonwebtoken.lang.Collections;
+import cool.cade.test.gateway.perms.entity.UserEntity;
 import io.r2dbc.spi.Row;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

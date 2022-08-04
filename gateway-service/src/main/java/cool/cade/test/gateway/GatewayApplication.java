@@ -1,6 +1,5 @@
 package cool.cade.test.gateway;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -12,7 +11,6 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-//@MapperScan("cool.cade.test.gateway.mapper")
 public class GatewayApplication {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package cool.cade.test.gateway.service;
+package cool.cade.test.gateway.perms.service;
 
 import org.apache.commons.lang3.tuple.Pair;
 import reactor.core.publisher.Mono;

@@ -1,7 +1,7 @@
 package cool.cade.test.gateway.authentication.handler;
 
-import cool.cade.test.gateway.component.JwtProcessor;
-import cool.cade.test.gateway.component.RedisCache;
+import cool.cade.test.gateway.jwt.component.JwtProcessor;
+import cool.cade.common.component.RedisCache;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 /**
+ * 登出处理器
  * @author :Ander
  * @date : 2022/7/15
  */

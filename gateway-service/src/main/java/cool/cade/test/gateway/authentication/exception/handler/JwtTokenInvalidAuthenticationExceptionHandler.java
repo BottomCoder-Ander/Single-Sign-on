@@ -3,7 +3,7 @@ package cool.cade.test.gateway.authentication.exception.handler;
 import cool.cade.common.constant.StatusCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.JwtTokenInvalidException;
-import cool.cade.test.gateway.utils.ResponseUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -24,6 +24,6 @@ public class JwtTokenInvalidAuthenticationExceptionHandler extends AbstractAuthe
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
         log.debug("JwtTokenInvalidException Handling!");
         ServerHttpResponse response = exchange.getResponse();
-        return ResponseUtil.writeResponseResult(response, HttpStatus.FORBIDDEN, ResponseResult.error(StatusCodeEnum.TOKEN_INVALID));
+        return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.FORBIDDEN, ResponseResult.error(StatusCodeEnum.TOKEN_INVALID));
     }
 }

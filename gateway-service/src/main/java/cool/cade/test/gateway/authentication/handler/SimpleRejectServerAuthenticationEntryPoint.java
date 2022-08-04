@@ -1,12 +1,9 @@
 package cool.cade.test.gateway.authentication.handler;
 
-import com.alibaba.fastjson2.JSON;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import cool.cade.common.constant.StatusCodeEnum;
 import cool.cade.common.utils.ResponseResult;
-import cool.cade.test.gateway.utils.ResponseUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -26,13 +23,10 @@ public class SimpleRejectServerAuthenticationEntryPoint implements ServerAuthent
 
     @Override
     public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException ex) {
-        ServerHttpResponse response = exchange.getResponse();
-
-
-        log.debug("未认证！");
+        log.trace("未认证！");
 
         // 授权失败
-        return ResponseUtil.writeResponseResult(response,
+        return ReactiveResponseUtil.writeResponseResult(exchange.getResponse(),
                 HttpStatus.FORBIDDEN,
                 ResponseResult.error(StatusCodeEnum.UNAUTHENTICATED));
     }

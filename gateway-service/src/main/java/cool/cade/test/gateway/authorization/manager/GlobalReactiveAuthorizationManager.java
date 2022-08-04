@@ -1,6 +1,6 @@
 package cool.cade.test.gateway.authorization.manager;
 
-import cool.cade.test.gateway.service.Impl.MenuServiceImpl;
+import cool.cade.test.gateway.perms.service.Impl.MenuServiceImpl;
 import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;

@@ -1,6 +1,5 @@
-package cool.cade.test.gateway.entity;
+package cool.cade.test.gateway.perms.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.relational.core.mapping.Table;

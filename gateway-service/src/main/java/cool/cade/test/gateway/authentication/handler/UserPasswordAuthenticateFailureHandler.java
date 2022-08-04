@@ -2,7 +2,7 @@ package cool.cade.test.gateway.authentication.handler;
 
 import cool.cade.common.constant.StatusCodeEnum;
 import cool.cade.common.utils.ResponseResult;
-import cool.cade.test.gateway.utils.ResponseUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
+ * 账户密码验证失败处理器
  * @author :Ander
  * @date : 2022/6/30
  */
@@ -34,7 +35,7 @@ public class UserPasswordAuthenticateFailureHandler implements ServerAuthenticat
 
         log.debug("on authentication failure!");
         
-        return ResponseUtil.writeResponseResult(
+        return ReactiveResponseUtil.writeResponseResult(
                 response ,
                 HttpStatus.FORBIDDEN,
                 ResponseResult.error(StatusCodeEnum.AUTHORITY_FAIL));

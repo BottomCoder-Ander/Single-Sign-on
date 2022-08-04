@@ -1,18 +1,17 @@
-package cool.cade.test.gateway.authentication.entity;
+package cool.cade.test.gateway.authentication.userdetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import cool.cade.test.gateway.entity.UserEntity;
-import io.jsonwebtoken.lang.Assert;
+import cool.cade.test.gateway.perms.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 /**
+ * 自定义的UserDetails
  * @author :Ander
  * @date : 2022/6/30
  */
@@ -22,7 +21,6 @@ public class AuthUserDetails implements UserDetails {
     private UserEntity user;
 
     private List<GrantedAuthority> authorities;
-
 
     // 反序列化，需要提供一个无参构造器
     public AuthUserDetails(){}

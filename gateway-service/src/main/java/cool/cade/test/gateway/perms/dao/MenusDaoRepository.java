@@ -1,6 +1,6 @@
-package cool.cade.test.gateway.dao;
+package cool.cade.test.gateway.perms.dao;
 
-import cool.cade.test.gateway.entity.MenuEntity;
+import cool.cade.test.gateway.perms.entity.MenuEntity;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,17 +1,16 @@
-package cool.cade.test.gateway.component;
+package cool.cade.common.component;
 
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
-import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings(value = { "unchecked", "rawtypes" })
+/**
+ * Redis工具类
+ */
 public class RedisCache {
 
 

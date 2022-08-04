@@ -1,15 +1,13 @@
 package cool.cade.test.gateway.config;
 
 
-import cool.cade.test.gateway.component.RedisCache;
+import cool.cade.common.component.RedisCache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  *  @author :Ander

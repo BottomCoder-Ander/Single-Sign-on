@@ -3,7 +3,7 @@ package cool.cade.test.gateway.authentication.exception.handler;
 import cool.cade.common.constant.StatusCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.ServerInternalException;
-import cool.cade.test.gateway.utils.ResponseUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -25,7 +25,7 @@ public class ServerInternalAuthenticationExceptionHandler extends AbstractAuthen
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
         log.debug("serverInternalExceptionHandler Handling!");
         ServerHttpResponse response = exchange.getResponse();
-        return ResponseUtil.writeResponseResult(response, HttpStatus.INTERNAL_SERVER_ERROR,
+        return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.INTERNAL_SERVER_ERROR,
                 ResponseResult.error(StatusCodeEnum.INTERNAL_ERROR));
     }
 }

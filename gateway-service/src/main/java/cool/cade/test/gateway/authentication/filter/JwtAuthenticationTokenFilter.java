@@ -3,16 +3,15 @@ package cool.cade.test.gateway.authentication.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import cool.cade.common.utils.JacksonUtil;
 import cool.cade.common.utils.ResponseResult;
-import cool.cade.test.gateway.component.JwtProcessor;
-import cool.cade.test.gateway.component.RedisCache;
-import cool.cade.test.gateway.authentication.entity.AuthUserDetails;
+import cool.cade.test.gateway.jwt.component.JwtProcessor;
+import cool.cade.common.component.RedisCache;
+import cool.cade.test.gateway.authentication.userdetails.AuthUserDetails;
 import cool.cade.test.gateway.authentication.exception.JwtRefreshTokenErrorException;
 import cool.cade.test.gateway.authentication.exception.JwtTokenExpiredException;
 import cool.cade.test.gateway.authentication.exception.JwtTokenInvalidException;
 import cool.cade.test.gateway.authentication.exception.ServerInternalException;
-import cool.cade.test.gateway.entity.JwtTokenEntity;
-import cool.cade.test.gateway.utils.ResponseUtil;
-import io.jsonwebtoken.Claims;
+import cool.cade.test.gateway.jwt.entity.JwtTokenEntity;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,6 +40,9 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
 
     private RedisCache redisCache;
     private JwtProcessor jwtProcessor;
+    /**
+     * 默认拦截的url，即刷新token的请求地址
+     */
     private String refreshUrl = "/auth/token/refresh";
     private ServerWebExchangeMatcher refreshTokenUrlMatcher = ServerWebExchangeMatchers.pathMatchers(refreshUrl);
 
@@ -73,6 +75,12 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
                 .switchIfEmpty(Mono.defer(()->handleToken(exchange, chain)));
     }
 
+    /**
+     * 处理token，如果验证失败，则返回异常，交给异常处理器处理。如果没有token，则忽略，交给其他filter
+     * @param exchange
+     * @param chain
+     * @return
+     */
     private Mono<Void> handleToken(ServerWebExchange exchange, WebFilterChain chain) {
 
         log.debug("handing token!");
@@ -105,6 +113,12 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
         return chain.filter(exchange).contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));
 
     }
+
+    /**
+     * 处理refreshToken
+     * @param exchange
+     * @return
+     */
 
     Mono<Void> handleRefreshToken(ServerWebExchange exchange) {
         log.debug("handling refresh token");
@@ -147,7 +161,7 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 
-        return ResponseUtil.writeResponseResult(exchange.getResponse(), HttpStatus.OK,
+        return ReactiveResponseUtil.writeResponseResult(exchange.getResponse(), HttpStatus.OK,
                 ResponseResult.ok(jwtTokenEntity)).contextWrite(
                 ReactiveSecurityContextHolder.withAuthentication(authentication));
 

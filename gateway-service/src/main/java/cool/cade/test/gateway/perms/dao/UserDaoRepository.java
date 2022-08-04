@@ -1,6 +1,6 @@
-package cool.cade.test.gateway.dao;
+package cool.cade.test.gateway.perms.dao;
 
-import cool.cade.test.gateway.entity.UserEntity;
+import cool.cade.test.gateway.perms.entity.UserEntity;
 import reactor.core.publisher.Mono;
 
 /**

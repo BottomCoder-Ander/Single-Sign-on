@@ -7,6 +7,10 @@ import cool.cade.common.constant.StatusCodeEnum;
 
 import java.util.HashMap;
 
+/**
+ * 响应数据类
+ * @param <T> 响应数据类型
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> {
     private static final long serialVersionUID = 1L;
@@ -17,7 +21,6 @@ public class ResponseResult<T> {
      * msg:消息
      * data:数据
      */
-
     private int code;
     private String msg;
     private T data;

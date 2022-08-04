@@ -1,7 +1,8 @@
-package cool.cade.test.gateway.component;
+package cool.cade.test.gateway.jwt.component;
 
+import cool.cade.common.component.RedisCache;
 import cool.cade.test.gateway.config.JwtProperties;
-import cool.cade.test.gateway.entity.JwtTokenEntity;
+import cool.cade.test.gateway.jwt.entity.JwtTokenEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -13,11 +14,9 @@ import java.util.UUID;
 
 public class JwtProcessor {
     private JwtProperties jwtProperties;
-    private RedisCache redisCache;
 
-    public JwtProcessor(JwtProperties jwtProperties, RedisCache redisCache) {
+    public JwtProcessor(JwtProperties jwtProperties) {
         this.jwtProperties= jwtProperties;
-        this.redisCache = redisCache;
     }
 
     public JwtTokenEntity createJwtTokenAndRefreshToken(String tokenSubject, String refreshTokenSubject){

@@ -1,8 +1,8 @@
-package cool.cade.test.gateway.service.Impl;
+package cool.cade.test.gateway.perms.service.Impl;
 
-import cool.cade.test.gateway.dao.UserDaoRepository;
-import cool.cade.test.gateway.entity.UserEntity;
-import cool.cade.test.gateway.service.UserService;
+import cool.cade.test.gateway.perms.dao.UserDaoRepository;
+import cool.cade.test.gateway.perms.entity.UserEntity;
+import cool.cade.test.gateway.perms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

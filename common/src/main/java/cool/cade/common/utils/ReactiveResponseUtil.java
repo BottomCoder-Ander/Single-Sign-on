@@ -1,20 +1,20 @@
-package cool.cade.test.gateway.utils;
+package cool.cade.common.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import cool.cade.common.constant.StatusCodeEnum;
-import cool.cade.common.utils.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import reactor.core.publisher.Mono;
 
 /**
+ * reactive响应，工具
  * @author :Ander
  * @date : 2022/7/14
  */
 @Slf4j
-public class ResponseUtil {
+public class ReactiveResponseUtil {
     public static Mono<Void> writeResponseResult(ServerHttpResponse response,
                                                  HttpStatus code,
                                                  ResponseResult<?> result){

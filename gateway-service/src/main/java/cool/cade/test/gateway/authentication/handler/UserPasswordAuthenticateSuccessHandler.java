@@ -2,14 +2,17 @@ package cool.cade.test.gateway.authentication.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import cool.cade.common.utils.JacksonUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import cool.cade.common.utils.ResponseResult;
-import cool.cade.test.gateway.component.RedisCache;
-import cool.cade.test.gateway.authentication.entity.AuthUserDetails;
-import cool.cade.test.gateway.authentication.entity.dto.JwtTokenDto;
+import cool.cade.common.component.RedisCache;
+import cool.cade.test.gateway.authentication.userdetails.AuthUserDetails;
 import cool.cade.test.gateway.authentication.exception.ServerInternalException;
+import cool.cade.test.gateway.jwt.component.JwtProcessor;
+import cool.cade.test.gateway.jwt.entity.JwtTokenEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
@@ -21,11 +24,10 @@ import reactor.core.publisher.Mono;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 账户密码验证成功处理器
  * @author :Ander
  * @date : 2022/6/30
- */
-
-/**
+ *
  * Webflux应该实现ServerAuthenticationSuccessHandler，而servlet实现AuthenticationSuccessHandler
  * 默认实现是WebFilterChainServerAuthenticationSuccessHandler
  * 继承WebFilterChainServerAuthenticationSuccessHandler是继续调用filter和实现ServerAuthenticationSuccessHandler没有什么区别
@@ -73,18 +75,14 @@ public class UserPasswordAuthenticateSuccessHandler implements ServerAuthenticat
             log.debug("generating jwt token");
             // 生成token，直接把userDetails放进去
             AuthUserDetails principal = (AuthUserDetails) authentication.getPrincipal();
-            String jwtToken = jwtProcessor.createToken(jacksonUtil.toJsonString(principal));
-            String jwtRefreshToken = jwtProcessor.createRefreshToken(userId);
-            String redisKey = jwtProcessor.genRefreshTokenCacheKey(jwtRefreshToken);
+            JwtTokenEntity jwtTokenEntity = jwtProcessor.createJwtTokenAndRefreshToken(jacksonUtil.toJsonString(principal), userId);
+
+            String redisKey = jwtProcessor.genRefreshTokenCacheKey(jwtTokenEntity.getRefreshToken());
             redisCache.setCacheObject(redisKey, userDetails, jwtProcessor.getRefreshTTL(), TimeUnit.SECONDS);
 
-            JwtTokenDto jwtTokenDto = new JwtTokenDto(jwtToken, jwtRefreshToken);
-            dataBytes = ResponseResult.ok(jwtTokenDto).toJSONBytes();
+            return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.ACCEPTED, ResponseResult.ok(jwtTokenEntity));
         } catch (JsonProcessingException e) {
             return Mono.error(new ServerInternalException());
         }
-
-        DataBuffer dataBuffer = response.bufferFactory().wrap(dataBytes);
-        return response.writeWith(Mono.just(dataBuffer));
     }
 }

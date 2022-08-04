@@ -1,8 +1,8 @@
-package cool.cade.test.gateway.service.Impl;
+package cool.cade.test.gateway.perms.service.Impl;
 
-import cool.cade.test.gateway.dao.MenusDaoRepository;
-import cool.cade.test.gateway.entity.MenuEntity;
-import cool.cade.test.gateway.service.MenuService;
+import cool.cade.test.gateway.perms.dao.MenusDaoRepository;
+import cool.cade.test.gateway.perms.entity.MenuEntity;
+import cool.cade.test.gateway.perms.service.MenuService;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;

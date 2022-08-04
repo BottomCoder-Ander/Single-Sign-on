@@ -2,10 +2,13 @@ package cool.cade.common.constant;
 
 import org.apache.http.HttpStatus;
 
+/**
+ * response result响应状态码
+ */
 public enum StatusCodeEnum {
 
 
-    SUCCESS(200, "success"),
+    SUCCESS(00000, "success"),
     AUTHORITY_FAIL(00001,"授权失败！"),
     UNAUTHENTICATED(00002,"未认证，请登录！"),
     TOKEN_EXPIRED(00003, "Token expired!"),

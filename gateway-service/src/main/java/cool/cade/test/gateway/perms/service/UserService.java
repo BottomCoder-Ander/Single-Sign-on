@@ -1,6 +1,6 @@
-package cool.cade.test.gateway.service;
+package cool.cade.test.gateway.perms.service;
 
-import cool.cade.test.gateway.entity.UserEntity;
+import cool.cade.test.gateway.perms.entity.UserEntity;
 import reactor.core.publisher.Mono;
 
 /**

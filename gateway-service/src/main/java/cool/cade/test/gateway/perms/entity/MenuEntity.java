@@ -1,4 +1,4 @@
-package cool.cade.test.gateway.entity;
+package cool.cade.test.gateway.perms.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

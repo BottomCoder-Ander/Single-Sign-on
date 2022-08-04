@@ -10,7 +10,7 @@ import cool.cade.test.gateway.authentication.filter.JwtAuthenticationTokenFilter
 import cool.cade.test.gateway.authentication.handler.*;
 import cool.cade.test.gateway.authorization.manager.GlobalReactiveAuthorizationManager;
 import cool.cade.test.gateway.jackson.deserializer.GrantedAuthrorityDeserializer;
-import cool.cade.test.gateway.utils.ResponseUtil;
+import cool.cade.common.utils.ReactiveResponseUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,7 +107,7 @@ public class SecurityConfig  {
                             .accessDeniedHandler(
                                     // 无权限，响应403
                                     (exchange, deniedException) ->
-                                        ResponseUtil.writeResponseResult(
+                                        ReactiveResponseUtil.writeResponseResult(
                                                 exchange.getResponse(), HttpStatus.FORBIDDEN, ResponseResult.error(StatusCodeEnum.AUTHORITY_FAIL))
 
                             )

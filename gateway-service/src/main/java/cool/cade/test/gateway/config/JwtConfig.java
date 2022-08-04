@@ -1,6 +1,7 @@
 package cool.cade.test.gateway.config;
 
 //import cool.cade.test.gateway.converter.ConfigStringToSignatureAlgorithmConverter;
+import cool.cade.test.gateway.jwt.component.JwtProcessor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,11 @@ public class JwtConfig {
 //        return new ConfigStringToSignatureAlgorithmConverter();
 //    }
 
+    /**
+     * jwt工具
+     * @param jwtProperties
+     * @return
+     */
     @Bean
     public JwtProcessor jwtProcessor(JwtProperties jwtProperties){
         return new JwtProcessor(jwtProperties);

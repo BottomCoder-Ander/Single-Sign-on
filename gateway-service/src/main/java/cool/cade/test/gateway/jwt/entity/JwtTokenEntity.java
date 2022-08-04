@@ -1,4 +1,4 @@
-package cool.cade.test.gateway.entity;
+package cool.cade.test.gateway.jwt.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

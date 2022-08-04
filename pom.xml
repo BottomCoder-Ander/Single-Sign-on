@@ -15,7 +15,6 @@
     <description>Single-Sign-on</description>
     <packaging>pom</packaging>
     <modules>
-        <module>auth-service</module>
         <module>hello-service</module>
         <module>gateway-service</module>
         <module>common</module>

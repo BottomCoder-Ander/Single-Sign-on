@@ -1,8 +1,9 @@
-package cool.cade.test.gateway.authentication.entity.vo;
+package cool.cade.test.gateway.perms.entity.vo;
 
 import lombok.Data;
 
 /**
+ * 用于返回给前端的用户信息
  * @author :Ander
  * @date : 2022/7/14
  */
