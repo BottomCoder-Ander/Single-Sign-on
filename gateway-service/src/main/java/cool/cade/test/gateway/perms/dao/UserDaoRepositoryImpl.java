@@ -37,7 +37,7 @@ public class UserDaoRepositoryImpl implements UserDaoRepository {
                 "GROUP BY   " +
                 " usr.`id`";
 
-        log.debug(sql);
+        log.trace(sql);
 
         return databaseClient.sql(sql)
                 .bind("userName", userName)

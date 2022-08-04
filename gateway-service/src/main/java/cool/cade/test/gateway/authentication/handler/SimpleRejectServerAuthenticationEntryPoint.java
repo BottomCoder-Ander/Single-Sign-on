@@ -1,11 +1,10 @@
 package cool.cade.test.gateway.authentication.handler;
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -28,6 +27,6 @@ public class SimpleRejectServerAuthenticationEntryPoint implements ServerAuthent
         // 授权失败
         return ReactiveResponseUtil.writeResponseResult(exchange.getResponse(),
                 HttpStatus.FORBIDDEN,
-                ResponseResult.error(StatusCodeEnum.UNAUTHENTICATED));
+                ResponseResult.error(BizCodeEnum.UNAUTHENTICATED));
     }
 }

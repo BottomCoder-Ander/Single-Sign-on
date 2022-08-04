@@ -2,10 +2,7 @@ package cool.cade.common.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import cool.cade.common.constant.StatusCodeEnum;
-
-import java.util.HashMap;
+import cool.cade.common.constant.BizCodeEnum;
 
 /**
  * 响应数据类
@@ -17,7 +14,7 @@ public class ResponseResult<T> {
 
     private static final JacksonUtil jacksonUtil = new JacksonUtil();
     /**
-     * code:状态码
+     * code:状态码（自定义的）
      * msg:消息
      * data:数据
      */
@@ -42,9 +39,9 @@ public class ResponseResult<T> {
         this.data = data;
     }
 
-    public ResponseResult(StatusCodeEnum statusCodeEnum) {
-        this.code = statusCodeEnum.getCode();
-        this.msg = statusCodeEnum.getMsg();
+    public ResponseResult(BizCodeEnum bizCodeEnum) {
+        this.code = bizCodeEnum.getCode();
+        this.msg = bizCodeEnum.getMsg();
     }
 
     public Integer getCode() {
@@ -75,28 +72,28 @@ public class ResponseResult<T> {
     }
 
     public static<T> ResponseResult<T> ok(T data){
-        return new ResponseResult<T>(StatusCodeEnum.SUCCESS.getCode(),
-                StatusCodeEnum.SUCCESS.getMsg(), data);
+        return new ResponseResult<T>(BizCodeEnum.SUCCESS.getCode(),
+                BizCodeEnum.SUCCESS.getMsg(), data);
     }
 
     public static<T> ResponseResult<T> ok(){
-        return new ResponseResult<T>(StatusCodeEnum.SUCCESS);
+        return new ResponseResult<T>(BizCodeEnum.SUCCESS);
     }
 
     public static <T> ResponseResult<T> error(int code, String msg, T data) {
         return new ResponseResult<>(code, msg, data);
     }
 
-    public static <T> ResponseResult<T>  error(StatusCodeEnum codeEnum, T data) {
+    public static <T> ResponseResult<T>  error(BizCodeEnum codeEnum, T data) {
         return ResponseResult.error(codeEnum.getCode(), codeEnum.getMsg(), data);
     }
 
-    public static <T> ResponseResult<T>  error(StatusCodeEnum codeEnum) {
+    public static <T> ResponseResult<T>  error(BizCodeEnum codeEnum) {
         return ResponseResult.error(codeEnum.getCode(), codeEnum.getMsg(), null);
     }
 
     public static <T> ResponseResult<T> error() {
-        return ResponseResult.error(StatusCodeEnum.INTERNAL_ERROR,null);
+        return ResponseResult.error(BizCodeEnum.INTERNAL_ERROR,null);
     }
 
     /**

@@ -1,6 +1,6 @@
 package cool.cade.test.gateway.authentication.exception.handler;
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.JwtRefreshTokenErrorException;
 import cool.cade.common.utils.ReactiveResponseUtil;
@@ -24,8 +24,8 @@ public class JwtRefreshTokenErrorAuthenticationExceptionHandler extends Abstract
 
     @Override
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
-        log.debug("JwtRefreshTokenExceptionHandler Handling!");
+        log.trace("JwtRefreshTokenExceptionHandler Handling!");
         return ReactiveResponseUtil.writeResponseResult(exchange.getResponse(), HttpStatus.FORBIDDEN,
-                ResponseResult.error(StatusCodeEnum.REFRESH_TOKEN_INVALID));
+                ResponseResult.error(BizCodeEnum.REFRESH_TOKEN_INVALID));
     }
 }

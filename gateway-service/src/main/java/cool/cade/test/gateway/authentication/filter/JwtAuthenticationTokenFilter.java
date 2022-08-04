@@ -83,10 +83,10 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
      */
     private Mono<Void> handleToken(ServerWebExchange exchange, WebFilterChain chain) {
 
-        log.debug("handing token!");
+        log.trace("handing token!");
         String token = jwtProcessor.extractTokenFromRequest(exchange.getRequest());
         if(!StringUtils.hasLength(token)) {
-            log.debug("token not found!");
+            log.trace("token not found!");
             return chain.filter(exchange);
         }
         //解析token
@@ -121,7 +121,7 @@ public class JwtAuthenticationTokenFilter implements WebFilter {
      */
 
     Mono<Void> handleRefreshToken(ServerWebExchange exchange) {
-        log.debug("handling refresh token");
+        log.trace("handling refresh token");
         String refreshToken =jwtProcessor.extractRefreshTokenFromRequest(exchange.getRequest());
         if(Objects.isNull(refreshToken)){
             log.warn("refresh token not found!");

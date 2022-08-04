@@ -1,6 +1,6 @@
 package cool.cade.test.gateway.authentication.exception.handler;
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.ServerInternalException;
 import cool.cade.common.utils.ReactiveResponseUtil;
@@ -23,9 +23,9 @@ public class ServerInternalAuthenticationExceptionHandler extends AbstractAuthen
 
     @Override
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
-        log.debug("serverInternalExceptionHandler Handling!");
+        log.trace("serverInternalExceptionHandler Handling!");
         ServerHttpResponse response = exchange.getResponse();
         return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.INTERNAL_SERVER_ERROR,
-                ResponseResult.error(StatusCodeEnum.INTERNAL_ERROR));
+                ResponseResult.error(BizCodeEnum.INTERNAL_ERROR));
     }
 }

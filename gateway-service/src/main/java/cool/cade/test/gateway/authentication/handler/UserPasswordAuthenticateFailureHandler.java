@@ -1,6 +1,6 @@
 package cool.cade.test.gateway.authentication.handler;
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.common.utils.ReactiveResponseUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,19 +26,19 @@ public class UserPasswordAuthenticateFailureHandler implements ServerAuthenticat
 
     @Override
     public Mono<Void> onAuthenticationFailure(WebFilterExchange webFilterExchange, AuthenticationException exception) {
-        log.debug("username password authentication fail!");
+        log.trace("username password authentication fail!");
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpResponse response = exchange.getResponse();//设置headers
         HttpHeaders headers = response.getHeaders();
         System.out.println(headers);
         headers.add("Cache-Control","no-store,no-cache,must-revalidate,max-age-8");
 
-        log.debug("on authentication failure!");
+        log.trace("on authentication failure!");
         
         return ReactiveResponseUtil.writeResponseResult(
                 response ,
                 HttpStatus.FORBIDDEN,
-                ResponseResult.error(StatusCodeEnum.AUTHORITY_FAIL));
+                ResponseResult.error(BizCodeEnum.AUTHORITY_FAIL));
     }
 
 }

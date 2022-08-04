@@ -21,7 +21,7 @@ public class UserLogoutSuccessHandler implements ServerLogoutSuccessHandler {
 
     @Override
     public Mono<Void> onLogoutSuccess(WebFilterExchange exchange, Authentication authentication) {
-        log.debug("logout success");
+        log.trace("logout success");
         return ReactiveResponseUtil.writeResponseResult(exchange.getExchange().getResponse(), HttpStatus.ACCEPTED, ResponseResult.ok());
     }
 }

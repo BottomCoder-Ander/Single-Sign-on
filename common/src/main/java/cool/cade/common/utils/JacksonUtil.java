@@ -33,12 +33,23 @@ public final class JacksonUtil {
         modules =  new CopyOnWriteArrayList<>();
     }
 
+    /**
+     * 增加一个序列化器
+     * @param clazz
+     * @param deserializer
+     * @param name
+     * @param <T>
+     */
     public <T> void addDeserializer(Class<T> clazz, JsonDeserializer<? extends T> deserializer, String name){
         SimpleModule simpleModule = new SimpleModule(name);
         simpleModule.addDeserializer(clazz, deserializer);
         modules.add(simpleModule);
     }
 
+    /**
+     * 获取到objectMapper
+     * @return
+     */
     public ObjectMapper getObjectMapper(){
         ObjectMapper objectMapper = objectMapperThreadLocal.get();
         if(objectMapper == null) {
@@ -49,14 +60,34 @@ public final class JacksonUtil {
         return objectMapper;
     }
 
+    /**
+     * 对象转化为Json String
+     * @param obj
+     * @return
+     * @throws JsonProcessingException
+     */
     public String toJsonString(Object obj) throws JsonProcessingException {
         return getObjectMapper().writeValueAsString(obj);
     }
 
+    /**
+     * 对象转化为jsonBytes
+     * @param obj
+     * @return
+     * @throws JsonProcessingException
+     */
     public byte[] toJSONBytes(Object obj) throws JsonProcessingException {
         return getObjectMapper().writeValueAsBytes(obj);
     }
 
+    /**
+     * json string 转为 T类型的对象
+     * @param str
+     * @param clazz
+     * @return
+     * @param <T>
+     * @throws JsonProcessingException
+     */
     public <T> T jsonStrToObject(String str, Class<T> clazz) throws JsonProcessingException {
         return getObjectMapper().readValue(str, clazz);
     }

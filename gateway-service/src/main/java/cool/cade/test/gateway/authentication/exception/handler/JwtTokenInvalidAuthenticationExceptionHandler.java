@@ -1,6 +1,6 @@
 package cool.cade.test.gateway.authentication.exception.handler;
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.JwtTokenInvalidException;
 import cool.cade.common.utils.ReactiveResponseUtil;
@@ -22,8 +22,8 @@ public class JwtTokenInvalidAuthenticationExceptionHandler extends AbstractAuthe
 
     @Override
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
-        log.debug("JwtTokenInvalidException Handling!");
+        log.trace("JwtTokenInvalidException Handling!");
         ServerHttpResponse response = exchange.getResponse();
-        return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.FORBIDDEN, ResponseResult.error(StatusCodeEnum.TOKEN_INVALID));
+        return ReactiveResponseUtil.writeResponseResult(response, HttpStatus.FORBIDDEN, ResponseResult.error(BizCodeEnum.TOKEN_INVALID));
     }
 }

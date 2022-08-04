@@ -1,11 +1,9 @@
 package cool.cade.common.constant;
 
-import org.apache.http.HttpStatus;
-
 /**
  * response result响应状态码
  */
-public enum StatusCodeEnum {
+public enum BizCodeEnum {
 
 
     SUCCESS(00000, "success"),
@@ -22,7 +20,7 @@ public enum StatusCodeEnum {
     private int code;
     private String msg;
 
-    StatusCodeEnum(int code, String msg) {
+    BizCodeEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

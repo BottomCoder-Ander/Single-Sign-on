@@ -1,7 +1,7 @@
 package cool.cade.test.gateway.config;
 
 
-import cool.cade.common.constant.StatusCodeEnum;
+import cool.cade.common.constant.BizCodeEnum;
 import cool.cade.common.utils.JacksonUtil;
 import cool.cade.common.utils.ResponseResult;
 import cool.cade.test.gateway.authentication.exception.handler.JwtAuthenticationExceptionHandlerFactories;
@@ -108,7 +108,7 @@ public class SecurityConfig  {
                                     // 无权限，响应403
                                     (exchange, deniedException) ->
                                         ReactiveResponseUtil.writeResponseResult(
-                                                exchange.getResponse(), HttpStatus.FORBIDDEN, ResponseResult.error(StatusCodeEnum.AUTHORITY_FAIL))
+                                                exchange.getResponse(), HttpStatus.FORBIDDEN, ResponseResult.error(BizCodeEnum.AUTHORITY_FAIL))
 
                             )
             )

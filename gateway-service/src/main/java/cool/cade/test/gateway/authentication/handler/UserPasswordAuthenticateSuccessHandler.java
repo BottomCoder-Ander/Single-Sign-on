@@ -53,14 +53,14 @@ public class UserPasswordAuthenticateSuccessHandler implements ServerAuthenticat
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange,
                                               Authentication authentication) {
-        log.debug("username password authentication success!");
+        log.trace("username password authentication success!");
 
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpResponse response = exchange.getResponse();//设置headers
         HttpHeaders headers = response.getHeaders();
         headers.add("Cache-Control","no-store,no-cache,must-revalidate,max-age-8");
 
-        log.debug("on authentication success!");
+        log.trace("on authentication success!");
         // 从authentication中重新拿到userDetails
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         String userId = userDetails.getUser().getId().toString();
@@ -72,7 +72,7 @@ public class UserPasswordAuthenticateSuccessHandler implements ServerAuthenticat
 
         byte[] dataBytes = {};
         try {
-            log.debug("generating jwt token");
+            log.trace("generating jwt token");
             // 生成token，直接把userDetails放进去
             AuthUserDetails principal = (AuthUserDetails) authentication.getPrincipal();
             JwtTokenEntity jwtTokenEntity = jwtProcessor.createJwtTokenAndRefreshToken(jacksonUtil.toJsonString(principal), userId);

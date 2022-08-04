@@ -38,7 +38,7 @@ public class DelegatingAuthenticationExceptionHandler extends AbstractAuthentica
      */
     @Override
     public Mono<?> handle(ServerWebExchange exchange, Throwable ex) {
-        log.debug("delegator handling  exception!");
+        log.trace("delegator handling  exception!");
         for (ExceptionHandler delegateExceptionHandler : delegateExceptionHandlers) {
             if( delegateExceptionHandler.getExceptionClass().isAssignableFrom(ex.getClass())) {
                 return delegateExceptionHandler.handle(exchange, ex);

@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis工具类
  */
+
+@SuppressWarnings({"unchecked","rawtypes"})
 public class RedisCache {
 
 
@@ -80,6 +82,12 @@ public class RedisCache {
         return operation.get(key);
     }
 
+    /**
+     * 获取并且同时删除某个key
+     * @param key
+     * @return
+     * @param <T>
+     */
     public <T> T getCacheObjectAndDelete(final String key) {
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
         return operation.getAndDelete(key);
@@ -132,6 +140,13 @@ public class RedisCache {
         return setOperation;
     }
 
+    /**
+     * 添加一个集合
+     * @param key
+     * @param data
+     * @return
+     * @param <T>
+     */
     public <T> BoundSetOperations<String, T> setCacheSet(final String key, T data)  {
         BoundSetOperations<String, T> setOperation = redisTemplate.boundSetOps(key);
         setOperation.add(data);
@@ -152,7 +167,6 @@ public class RedisCache {
         }
         return setOperation;
     }
-
 
     /**
      * 获得缓存的set
