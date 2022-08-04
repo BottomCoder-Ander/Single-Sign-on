@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      username: nacos
+      password: your-nacos-password
+      discovery:
+        server-addr: your-nacos-address
+
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+            allowedOriginPatterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+      routes:
+        - id: hello_route
+          uri: lb://hello-service
+          predicates:
+            - Path=/hello/**
+            - Path=/api/hello/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+  redis:
+    host: your-redis-host
+    port: 6379
+    password: your-redis-password
+
+  r2dbc:
+    url: r2dbc:mysql://your-database-address?characterEncoding=UTF-8
+    username: your-database-username
+    password: your-database-password
+    name: r2dbc
+    pool:
+      validation-query: SELECT 1
+      enabled: true
+      max-acquire-time: 5000
+      max-idle-time: 30m
+      max-size: 100
+
+
+#  datasource:
+#    username: root
+#    password: pqj.aehgi9_23n.
+#    hikari:
+#      connection-test-query: SELECT 1 FROM DUAL
+#      connection-timeout: 600000
+#      maximum-pool-size: 500
+#      max-lifetime: 1800000
+#      minimum-idle: 10
+#      validation-timeout: 3000
+#      idle-timeout: 60000
+#      connection-init-sql: SET NAMES utf8mb4
+
+jwt:
+  ttl: 3000
+  refresh-ttl: 30000
+  base64-secret-key: VGhpcyRpcyNhX3NlY3JldD1rZXk=
+#  signature-algorithm: HS256
+
+security:
+  exclude-auth-page:
+    - "/auth/login"
+    - "/auth/token/refresh"
+    - "/hello/say"
+
+logging:
+  level:
+    root: trace
